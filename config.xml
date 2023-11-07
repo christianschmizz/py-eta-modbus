@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<modbusTcp version="1 ">
+    <register id="1000 ">
+        <variable name="GM−C/PE−E 0 : B u f f e r − B u f f e r bottom o f f " nodeId="112 " fubId="10251 " fktId="0 "
+                  ioId="0" varId="12212 " scale="10 " unit="◦C" min="0 " def="400" max="1000"/>
+    </register>
+    <register id="1002">
+        <variable name="GM−C/PE−E 0 : B o i l e r − B o i l e r p r e s s u r e " nodeId="112 " fubId="10021" fktId="0 "
+                  ioId="0 " varId="12180 " scale="100 " unit="bar " min="" def="" max=""/>
+    </register>
+    <register id="1004">
+        <variable name="GM−C/PE−E 0 : HK 1 − Set−back " nodeId="112 " fubId="10101" fktId="0" ioId="0" varId="12107 "
+                  scale="10 " unit="◦C" min="0 " def="30 " max="300
+"/>
+    </register>
+</modbusTcp>
