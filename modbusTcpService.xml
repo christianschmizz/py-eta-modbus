@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<modbusTcp version="1">
+	<register id="1000">
+		<variable name="GM-C 0: Puffer - Puffer oben Min" nodeId="120" fubId="10251" fktId="0" ioId="0" varId="12211" scale="10" unit="°C" min="0" def="100" max="1000" />
+	</register>
+	<register id="1002">
+		<variable name="GM-C 0: Puffer - Puffer unten Aus" nodeId="120" fubId="10251" fktId="0" ioId="0" varId="12212" scale="10" unit="°C" min="0" def="500" max="1000" />
+	</register>
+	<register id="1004">
+		<variable name="GM-C 0: Puffer - Puffer unten" nodeId="120" fubId="10251" fktId="0" ioId="0" varId="12244" scale="10" unit="°C" min="" def="" max="" />
+	</register>
+	<register id="1006">
+		<variable name="GM-C 0: Puffer - Puffer oben/mitte" nodeId="120" fubId="10251" fktId="0" ioId="0" varId="12521" scale="10" unit="°C" min="" def="" max="" />
+	</register>
+	<register id="1008">
+		<variable name="GM-C 0: Puffer - Puffer oben" nodeId="120" fubId="10251" fktId="0" ioId="0" varId="12242" scale="10" unit="°C" min="" def="" max="" />
+	</register>
+	<register id="1010">
+		<variable name="GM-C 0: HK WH - Vorlauf" nodeId="120" fubId="10102" fktId="0" ioId="0" varId="12241" scale="10" unit="°C" min="" def="" max="" />
+	</register>
+	<register id="1012">
+		<variable name="GM-C 0: HK WH - Heizkreismischer - Zustand" nodeId="120" fubId="10102" fktId="0" ioId="11125" varId="2002" scale="1" unit="" min="" def="" max="" />
+	</register>
+	<register id="1014">
+		<variable name="PE-C 0: Kessel - Volllaststunden" nodeId="40" fubId="10021" fktId="0" ioId="0" varId="12153" scale="1" unit="" min="" def="" max="" />
+	</register>
+	<register id="1016">
+		<variable name="PE-C 0: Kessel - Gesamtverbrauch" nodeId="40" fubId="10021" fktId="0" ioId="0" varId="12016" scale="10" unit="kg" min="" def="" max="" />
+	</register>
+	<register id="1018">
+		<variable name="PE-C 0: Kessel - Stokerschnecke - Taktrate" nodeId="40" fubId="10021" fktId="0" ioId="11030" varId="2090" scale="10" unit="%" min="" def="" max="" />
+	</register>
+	<register id="1020">
+		<variable name="PE-C 0: Kessel - Stokerschnecke - Zustand" nodeId="40" fubId="10021" fktId="0" ioId="11030" varId="2002" scale="1" unit="" min="" def="" max="" />
+	</register>
+	<register id="1022">
+		<variable name="GM-C 0: HK GH - Vorlauf" nodeId="120" fubId="10101" fktId="0" ioId="0" varId="12241" scale="10" unit="°C" min="" def="" max="" />
+	</register>
+	<register id="1024">
+		<variable name="GM-C 0: HK GH - Heizkreispumpe - Anforderung" nodeId="120" fubId="10101" fktId="0" ioId="11124" varId="2001" scale="1" unit="" min="" def="" max="" />
+	</register>
+	<register id="1026">
+		<variable name="GM-C 0: HK WH - Heizkreispumpe - Anforderung" nodeId="120" fubId="10102" fktId="0" ioId="11124" varId="2001" scale="1" unit="" min="" def="" max="" />
+	</register>
+	<register id="1028">
+		<variable name="GM-C 0: HK GH - Heizkreismischer - Zustand" nodeId="120" fubId="10101" fktId="0" ioId="11125" varId="2002" scale="1" unit="" min="" def="" max="" />
+	</register>
+</modbusTcp>

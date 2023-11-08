@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
 
 # pip install pymodbus
@@ -32,35 +32,59 @@ class TimeSlotValue(collections.namedtuple('TimeSlot', 'temperature begin end'))
         return cls(temp=temp, begin=begin, end=end)
 
 import xml.etree.ElementTree as ET
+import re
+
+snake = lambda name: re.sub('((?!^)(?<!_)[A-Z][a-z]+|(?<=[a-z0-9])[A-Z])', r'_\1', name).lower()
+
 class Configuration:
+    def __init__(self):
+        self._registers = []
+
     @classmethod
     def loadFromFile(cls, file):
         data = ''
         with open(file, 'r') as f:
             data = f.read()
-        tree = ET.fromstring(data)
-        root = tree.getroot()
+        root = ET.fromstring(data)
         print(root.attrib['version'])
         version = root.attrib['version']
-        if version != '1.0':
-            raise ValueError('unsupported version')
+        if version != '1':
+            raise ValueError('unsupported version {}'.format(version))
         cfg = Configuration()
-        for v in root.findall(".//variable"):
-            var = Variable(v.attrib['name'])
-            print(var)
-            cfg.register(v.parent.get('id'))
+        for r in root.findall(".//register"):
+            v = r.find('./variable')
+            data = {
+                "reg_id":int(r.get('id')),
+                "name":v.get('name'),
+                "node_id":v.get('nodeId'),
+                "fub_id":v.get('fubId'),
+                "fkt_id":v.get('fktId'),
+                "io_id":v.get('ioId'),
+                "var_id":v.get('varId'),
+                "scale":int(v.get('scale')),
+                "unit":v.get('unit'),
+                "min":v.get('min'),
+                "max":v.get('max'),
+                "default":v.get('def')
+            }
+            cfg.register(Register(**data))
+        return cfg
 
     def register(self, var):
-        self.variables.append(var)
+        self._registers.append(var)
+    
+    def items(self):
+        return iter(self._registers)
 
 
-class Variable(collections.namedtuple('Var', 'reg_id name node_id fub_id fkt_id io_id var_id scale unit min max')):
+
+class Register(collections.namedtuple('Register', 'reg_id name node_id fub_id fkt_id io_id var_id scale unit min max default')):
     pass
 
 class ETAHeating:
     def __init__(self, host, config):
-        self.config = config
-        self.client = ModbusClient(host, port=502, unit_id=1, auto_open=True)
+        self._config = config
+        self._client = ModbusClient(host, port=502, unit_id=1, auto_open=True)
 
     def read(self, reg, length=2):
         if reg % 2 != 0:
@@ -68,37 +92,24 @@ class ETAHeating:
         if length % 2 != 0:
             raise ValueError("invalid length, has to be even")
 
-        return self.client.read_holding_registers(reg, length)
+        return self._client.read_holding_registers(reg, length)
 
     def read_numeric(self, reg, scale=1):
         r = self.read(reg)
         return SimpleNumericValue.fromRegister(r, 10)
+    
+    def fetch(self):
+        val = self.read(1000, 28)
+#        for v in self._config.items():
+#            print(v)
+        print(val)
 
 
 
 def main():
-    cfg = Configuration.loadFromFile('config.xml')
+    cfg = Configuration.loadFromFile('modbusTcpService.xml')
     eta = ETAHeating("192.168.1.252", cfg)
-    # print(eta.read_numeric(1000, 10))
-    # print(eta.read_numeric(1002, 10))
-    # print(eta.read_numeric(1004, 10))
-    # print(eta.read_numeric(1006, 10))
-    # print(eta.read_numeric(1008, 10))
-    return
-    while True:
-        #print(c.read_input_registers(1000, 2))
-
-        # read 10 registers at address 0, store result in regs list
-        regs_l = c.read_holding_registers(1000, 10)
-
-        # if success display registers
-        if regs_l:
-            print('reg ad #0 to 9: %s' % regs_l)
-        else:
-            print('unable to read registers')
-
-        # sleep 2s before next polling
-        time.sleep(2)
+    eta.fetch()
 
 if __name__ == '__main__':
     main()
