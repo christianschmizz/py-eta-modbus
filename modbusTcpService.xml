@@ -45,4 +45,19 @@
 	<register id="1028">
 		<variable name="GM-C 0: HK GH - Heizkreismischer - Zustand" nodeId="120" fubId="10101" fktId="0" ioId="11125" varId="2002" scale="1" unit="" min="" def="" max="" />
 	</register>
+	<register id="1030">
+		<variable name="PE-C 0: Lager - Vorrat" nodeId="40" fubId="10201" fktId="0" ioId="0" varId="12015" scale="10" unit="kg" min="-1000000" def="0" max="1000000" />
+	</register>
+	<register id="1032">
+		<variable name="PE-C 0: Kessel - Inhalt Pelletsbehälter" nodeId="40" fubId="10021" fktId="0" ioId="0" varId="12011" scale="10" unit="kg" min="0" def="0" max="0" />
+	</register>
+	<register id="1034">
+		<variable name="PE-C 0: Kessel - Vorlauf" nodeId="40" fubId="10021" fktId="0" ioId="0" varId="12241" scale="10" unit="°C" min="" def="" max="" />
+	</register>
+	<register id="1036">
+		<variable name="PE-C 0: Kessel - Rücklaufmischer" nodeId="40" fubId="10021" fktId="0" ioId="0" varId="12999" scale="10" unit="°C" min="" def="" max="" />
+	</register>
+	<register id="1038">
+		<variable name="PE-C 0: Kessel - Abgasgebläse" nodeId="40" fubId="10021" fktId="0" ioId="0" varId="12165" scale="1" unit="U/min" min="" def="" max="" />
+	</register>
 </modbusTcp>
