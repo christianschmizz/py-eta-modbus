@@ -13,7 +13,7 @@ coverage:
 # flake is configured in setup.cfg
 .PHONY: flake
 flake8:
-	@flake8 --exclude oasis/hzd oasis
+	@flake8 etamodbus
 
 .PHONY: build
 build:
