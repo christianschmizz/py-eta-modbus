@@ -46,4 +46,4 @@ class TimeSlotValue(collections.namedtuple('TimeSlot', 'temperature begin end'))
         temp = r[0]
         end = r[1] & 0xff
         begin = r[1] >> 8 & 0xff
-        return cls(temp=temp, begin=begin, end=end)
+        return cls(temperature=temp, begin=begin, end=end)
