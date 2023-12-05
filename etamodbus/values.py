@@ -9,6 +9,8 @@ class SimpleNumericValue(collections.namedtuple('SimpleNumeric', 'val unit scale
         if len(r) != 2:
             raise ValueError("two components needed")
         result = (r[0] << 16) | r[1]
+        if result > 0x7FFFFFFF: # one's complement for negative numbers
+           result = -(~result & 0x7FFFFFFF)
         return cls(val=result, unit=unit, scale=scale)
 
     def __str__(self):
@@ -16,7 +18,10 @@ class SimpleNumericValue(collections.namedtuple('SimpleNumeric', 'val unit scale
 
     @property
     def value(self):
-        return self.val/self.scale
+        if self.scale == 1:
+            return self.val
+        else:
+            return float(self.val/self.scale)
 
 
 class TextValue(collections.namedtuple('Text', 'code desc')):
