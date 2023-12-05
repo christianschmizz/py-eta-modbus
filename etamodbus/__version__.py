@@ -1,7 +1,7 @@
 __title__ = "py-eta-modbus"
 __description__ = "Accessing ETA heating data via modbus/tcp protocol"
 __url__ = "https://py-eta-modbus.readthedocs.io"
-__version__ = "1.0.0"
+__version__ = "1.0.5"
 __build__ = 0x022701
 __author__ = "Christian Schmizz"
 __author_email__ = "mail@christianschmizz.com"
