@@ -61,5 +61,11 @@ class Configuration:
         """Resolves the given register's description"""
         return self._registers[reg_addr]
 
+    def startswith(self, uri) -> List[RegisterDescription]:
+        for addr in self.items():
+            desc = self.resolve(addr)
+            if desc.uri.startswith(uri):
+                yield desc
+
     def items(self):
         return iter(self._registers)
