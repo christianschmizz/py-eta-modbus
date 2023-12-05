@@ -1,5 +1,5 @@
 from pyModbusTCP.client import ModbusClient
-
+import logging
 
 class ETAModbusClient:
     def __init__(self, host, config):
@@ -7,6 +7,12 @@ class ETAModbusClient:
         self._client = ModbusClient(host, port=502, unit_id=1, auto_open=True)
 
     def read(self, reg_addr, length=2):
+        """
+        Reads registers
+        :param int reg_addr: Register's address to start reading
+        :param int length: Number of register to read
+        :return: List of registers data
+        """
         if reg_addr % 2 != 0:
             raise ValueError("invalid reg, has to be even")
         if length % 2 != 0:
@@ -14,6 +20,11 @@ class ETAModbusClient:
         return self._client.read_holding_registers(reg_addr, length)
 
     def read_all(self):
+        """
+        Reads all registers at once as one big chunk. Registers
+        should be sequentially. "holes" in the address range might
+        lead to errors.
+        """
         num_registers = len(self._config) * 2
         reg_vals = self.read(self._config.first_addr, num_registers)
         i = 0
