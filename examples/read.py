@@ -8,7 +8,7 @@ from etamodbus import ETAModbusClient, Configuration
 
 def outside_temp():
     cfg = Configuration.from_file(os.path.join(os.path.dirname(__file__), '..', 'modbusTcpService.xml'))
-    conn = ETAModbusClient(os.getenv('ETA_ADDRESS', '192.168.1.252'), cfg)
+    conn = ETAModbusClient(os.getenv('ETA_ADDRESS'), cfg)
     descs = list(cfg.startswith('40/10241/0/0/12197'))
     desc = next(iter(descs), None)
     if desc:
