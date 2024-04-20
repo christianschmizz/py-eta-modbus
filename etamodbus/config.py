@@ -1,3 +1,4 @@
+from typing import List
 from xml.etree import ElementTree as ET
 
 from etamodbus.register import RegisterDescription
