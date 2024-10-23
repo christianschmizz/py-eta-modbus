@@ -8,7 +8,7 @@ ci:
 
 .PHONY: coverage
 coverage:
-	@pytest --cov-config .coveragerc --cov-report term --cov-report xml --cov=oasis --verbose tests/
+	@pytest --cov-config .coveragerc --cov-report term --cov-report xml --cov=etamodbus --verbose tests/
 
 # flake is configured in setup.cfg
 .PHONY: flake
