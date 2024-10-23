@@ -1,6 +1,9 @@
 from pyModbusTCP.client import ModbusClient
 import logging
 
+class ReadingRegistersFailedException(Exception):
+    pass
+
 class ETAModbusClient:
     def __init__(self, host, config):
         self._config = config
@@ -27,6 +30,8 @@ class ETAModbusClient:
         """
         num_registers = len(self._config) * 2
         reg_vals = self.read(self._config.first_addr, num_registers)
+        if reg_vals is None:
+            raise ReadingRegistersFailedException(f'failed to read registers from {self._config.first_addr} ({num_registers})')
         i = 0
         for reg_addr in range(self._config.first_addr, self._config.last_addr + 2, 2):
             desc = self._config.resolve(reg_addr)
